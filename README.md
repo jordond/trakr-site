@@ -1,5 +1,4 @@
 # trakr
-Website to showcase trakR app
 
 ## Setup
 1. Install [Node.js](http://nodejs.org/)

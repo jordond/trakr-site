@@ -26,5 +26,4 @@
         controllerAs: 'home'
       });
   }
-
-})();
+}());

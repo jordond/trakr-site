@@ -4,12 +4,15 @@ var _ = require('underscore.string')
   , fs = require('fs')
   , gulp = require('gulp')
   , path = require('path')
+  , pngquant = require('imagemin-pngquant')
+  , concat_json = require("gulp-concat-json")
   , $ = require('gulp-load-plugins')({
     pattern: [
       'del',
       'gulp-*',
       'main-bower-files',
       'nib',
+      'imagemin-pngquant',
       'streamqueue',
       'uglify-save-license',
       'wiredep',
@@ -22,16 +25,27 @@ var _ = require('underscore.string')
   , appFontFiles = path.join(appBase, 'fonts/**/*')
   , appImages = path.join(appBase, 'images/**/*')
   , appMarkupFiles = path.join(appBase, '**/*.{haml,html,jade}')
-  , appScriptFiles = path.join(appBase, '**/*.{ts,coffee,js}')
+  , appScriptFiles = path.join(appBase, '**/*.{coffee,es6,js,ts}')
   , appStyleFiles = path.join(appBase, '**/*.{css,less,scss,styl}')
+  , appJsonFiles = path.join(appBase, 'json/**/*.json')
   , bowerDir = JSON.parse(fs.readFileSync('.bowerrc')).directory + path.sep
 
-  , isProd = $.yargs.argv.stage === 'prod'
+  , isProd = $.yargs.argv.env === 'prod'
+  , isPretty = $.yargs.argv.pretty
+  , isMin = false
 
   , tsProject = $.typescript.createProject({
     declarationFiles: true,
     noExternalResolve: false
   });
+
+if (isProd) {
+  isMin = true;
+}
+
+if (isPretty || $.yargs.argv.p) {
+  isMin = false;
+}
 
 // delete build directory
 gulp.task('clean', function (cb) {
@@ -109,7 +123,7 @@ gulp.task('styles', ['clean'], function () {
       }
     })))
     .pipe($.if(isProd, $.concat('app.css')))
-    .pipe($.if(isProd, $.cssmin()))
+    .pipe($.if(isMin, $.cssmin()))
     .pipe($.if(isProd, $.rev()))
     .pipe(gulp.dest(buildConfig.buildCss));
 });
@@ -118,6 +132,7 @@ gulp.task('styles', ['clean'], function () {
 gulp.task('scripts', ['clean', 'analyze', 'markup'], function () {
   var typescriptFilter = $.filter('**/*.ts')
     , coffeeFilter = $.filter('**/*.coffee')
+    , es6Filter = $.filter('**/*.es6')
     , htmlFilter = $.filter('**/*.html')
     , jsFilter = $.filter('**/*.js');
 
@@ -127,6 +142,12 @@ gulp.task('scripts', ['clean', 'analyze', 'markup'], function () {
     '!**/*_test.*',
     '!**/index.html'
   ])
+    .pipe(es6Filter)
+    .pipe($.babel())
+    .pipe($.rename(function (filePath) {
+      filePath.extname = '.js';
+    }))
+    .pipe(es6Filter.restore())
     .pipe(typescriptFilter)
     .pipe($.typescript(tsProject))
     .pipe(typescriptFilter.restore())
@@ -144,7 +165,7 @@ gulp.task('scripts', ['clean', 'analyze', 'markup'], function () {
     .pipe($.if(isProd, $.angularFilesort()))
     .pipe($.if(isProd, $.concat('app.js')))
     .pipe($.if(isProd, $.ngAnnotate()))
-    .pipe($.if(isProd, $.uglify()))
+    .pipe($.if(isMin, $.uglify()))
     .pipe($.if(isProd, $.rev()))
     .pipe(gulp.dest(buildConfig.buildJs))
     .pipe(jsFilter.restore());
@@ -195,7 +216,7 @@ gulp.task('bowerCopy', ['inject'], function () {
     .pipe(cssFilter.restore())
     .pipe(jsFilter)
     .pipe($.if(isProd, $.concat('vendor.js')))
-    .pipe($.if(isProd, $.uglify({
+    .pipe($.if(isMin, $.uglify({
       preserveComments: $.uglifySaveLicense
     })))
     .pipe($.if(isProd, $.rev()))
@@ -246,29 +267,37 @@ gulp.task('bowerInject', ['bowerCopy'], function () {
   }
 });
 
+// copy Bower fonts and images into build directory
+gulp.task('bowerAssets', ['clean'], function () {
+  var assetFilter = $.filter('**/*.{eot,otf,svg,ttf,woff,gif,jpg,jpeg,png}');
+  return gulp.src($.mainBowerFiles(), {base: bowerDir})
+    .pipe(assetFilter)
+    .pipe(gulp.dest(buildConfig.extDir))
+    .pipe(assetFilter.restore());
+});
+
 // copy custom fonts into build directory
-gulp.task('fonts', ['fontsBower'], function () {
+gulp.task('fonts', ['clean'], function () {
   var fontFilter = $.filter('**/*.{eot,otf,svg,ttf,woff}');
   return gulp.src([appFontFiles])
     .pipe(fontFilter)
     .pipe(gulp.dest(buildConfig.buildFonts))
     .pipe(fontFilter.restore());
 });
-// copy Bower fonts into build directory
-gulp.task('fontsBower', ['clean'], function () {
-  var fontFilter = $.filter('**/*.{eot,otf,svg,ttf,woff}');
-  return gulp.src($.mainBowerFiles(), {base: bowerDir})
-    .pipe(fontFilter)
-    .pipe(gulp.dest(buildConfig.extDir))
-    .pipe(fontFilter.restore());
-});
 
 // copy and optimize images into build directory
 gulp.task('images', ['clean'], function () {
   return gulp.src(appImages)
-    .pipe($.if(isProd, $.imagemin()))
+    .pipe($.if(isProd, $.imagemin({progressive: true, optimizationLevel: 3, use: [pngquant()]})))
     .pipe(gulp.dest(buildConfig.buildImages));
 });
+
+// copy json files to build directory
+// gulp.task('json', ['clean'], function() {
+//   return gulp.src(appJsonFiles)
+//     .pipe(concat_json('resume.json'))
+//     .pipe(gulp.dest(buildConfig.buildJson));
+// });
 
 gulp.task('copyTemplates', ['bowerInject'], function () {
   // always copy templates to testBuild directory
@@ -293,16 +322,18 @@ gulp.task('deleteTemplates', ['copyTemplates'], function (cb) {
     .pipe(gulp.dest('tmp/' + buildConfig.buildDir))
     .on('end', function () {
       $.del([
+        buildConfig.buildTestDir,
         buildConfig.buildDir + '*',
         '!' + buildConfig.buildCss,
         '!' + buildConfig.buildFonts,
         '!' + buildConfig.buildImages,
         '!' + buildConfig.buildImages,
         '!' + buildConfig.buildJs,
+        '!' + buildConfig.buildJson,
         '!' + buildConfig.extDir,
         '!' + buildConfig.buildDir + 'index.html'
       ], {mark: true}, cb);
     });
 });
 
-gulp.task('build', ['deleteTemplates', 'images', 'fonts']);
+gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'fonts']);

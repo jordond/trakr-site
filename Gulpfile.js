@@ -2,7 +2,7 @@
 
 var gulp = require('gulp');
 
-require('require-dir')('./gulp');
+require('require-dir')('./gulp-files');
 
 gulp.task('dev', ['build'], function () {
   gulp.start('browserSync');

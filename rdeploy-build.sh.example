@@ -1,0 +1,98 @@
+#!/bin/bash
+
+# Colors
+red='\033[0;31m'
+blue='\033[0;34m'
+green='\033[0;32m'
+orange='\033[0;33m'
+nc='\033[0m'
+
+env="prod"
+branch="master"
+currentBranch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
+
+user=""
+server=""
+web_root=""
+
+site=""
+build_dir="build/app"
+serve_dir="app"
+
+fileName="deploy"
+outErr=">>$fileName.log"
+out=">>$fileName.log 2>&1"
+
+ssh="ssh $user@$server"
+cmd="cd $web_root/$site;"
+
+function update {
+  echo -e "${orange}Updating application...${red}"
+  if [[ "$branch" == "$currentBranch" ]] ; then
+    echo -e "No need to change branches" >> $fileName.log
+  else
+    git checkout $branch 2>&1 >>$fileName.log | tee --append $fileName.log
+  fi
+  git pull 2>&1 >>$fileName.log | tee --append $fileName.log &
+  spinner $!
+  echo
+}
+
+function compile {
+  echo -e "${orange}Compiling website files...${red}"
+  gulp build --env=$env 2>&1 >>$fileName.log | tee --append $fileName.log &
+  spinner $!
+  echo
+}
+
+function clean {
+  echo -e "${orange}Cleaning up before deploy...${red}"
+  $ssh "$cmd rm -rvf $serve_dir" 2>&1 >>$fileName.log | tee --append $fileName.log &
+  spinner $!
+  echo
+}
+
+function deploy {
+  echo -e "${orange}Deploying website files to ${green}$server@$web_root/$site/$serve_dir${orange}...${blue}"
+  scp -r $build_dir/ $user@$server:$web_root/$site/
+  echo
+}
+
+spinner() {
+  local pid=$1
+  local delay=0.25
+  local spinstr='|/-\'
+  while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+    local temp=${spinstr#?}
+    printf " [%c]  " "$spinstr"
+    local spinstr=$temp${spinstr%"$temp"}
+    sleep $delay
+    printf "\b\b\b\b\b\b"
+  done
+  printf "    \b\b\b\b"
+}
+
+if [ ! -z "$1" ]; then
+  branch=$1
+  if [ ! -z "$2" ]; then
+    case $2 in
+      "dev" )
+        env="dev" ;;
+      * )
+        env="prod" ;;
+    esac
+  fi
+fi
+
+rm $fileName.log > /dev/null 2>&1 &
+
+echo -e "${nc}Remote deploying branch ${green}$branch ${nc}on ${green}$site ${nc}in ${green}$env ${nc}environment..."
+echo -e "${nc}"
+
+update
+compile
+clean
+deploy
+
+echo -e "${green}"
+echo -e "All done. ${nc}"
