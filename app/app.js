@@ -12,7 +12,8 @@
     .module('trakr', [
       'ui.router',
       'mgcrea.ngStrap',
-      'home'
+      'home',
+      'components'
     ]);
 
   angular
