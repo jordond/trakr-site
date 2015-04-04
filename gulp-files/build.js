@@ -293,11 +293,11 @@ gulp.task('images', ['clean'], function () {
 });
 
 // copy json files to build directory
-// gulp.task('json', ['clean'], function() {
-//   return gulp.src(appJsonFiles)
-//     .pipe(concat_json('resume.json'))
-//     .pipe(gulp.dest(buildConfig.buildJson));
-// });
+gulp.task('json', ['clean'], function() {
+  return gulp.src(appJsonFiles)
+    .pipe(concat_json('app.json'))
+    .pipe(gulp.dest(buildConfig.buildJson));
+});
 
 gulp.task('copyTemplates', ['bowerInject'], function () {
   // always copy templates to testBuild directory
@@ -336,4 +336,4 @@ gulp.task('deleteTemplates', ['copyTemplates'], function (cb) {
     });
 });
 
-gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'fonts']);
+gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'fonts', 'json']);

@@ -12,6 +12,9 @@
     .module('trakr', [
       'ui.router',
       'mgcrea.ngStrap',
+      'underscore',
+      'duScroll',
+      'angularMoment',
       'home',
       'components'
     ]);
@@ -21,6 +24,6 @@
     .config(config);
 
   function config($urlRouterProvider) {
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
   }
 }());
