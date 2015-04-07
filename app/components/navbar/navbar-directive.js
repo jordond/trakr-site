@@ -14,7 +14,7 @@
     .module('components')
     .directive('navbar', navbar);
 
-  function navbar(JsonService) {
+  function navbar() {
     return {
       restrict: 'EA',
       scope: {},
@@ -22,7 +22,6 @@
       replace: true,
       controllerAs: 'navbar',
       controller: function () {
-        JsonService.get();
       }
     };
   }
