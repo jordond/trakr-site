@@ -12,8 +12,6 @@
     .module('trakr', [
       'ui.router',
       'mgcrea.ngStrap',
-      'underscore',
-      'duScroll',
       'angularMoment',
       'home',
       'components'

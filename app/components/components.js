@@ -10,6 +10,8 @@
    */
   angular
     .module('components', [
+      'underscore',
+      'duScroll'
     ]);
 
   angular
