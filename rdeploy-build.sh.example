@@ -8,8 +8,8 @@ orange='\033[0;33m'
 nc='\033[0m'
 
 env="prod"
-branch="master"
 currentBranch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
+branch=$currentBranch
 
 user=""
 server=""
@@ -54,7 +54,7 @@ function clean {
 
 function deploy {
   echo -e "${orange}Deploying website files to ${green}$server@$web_root/$site/$serve_dir${orange}...${blue}"
-  scp -r $build_dir/ $user@$server:$web_root/$site/
+  rsync -ahzP --delete $build_dir/* $user@$server:$web_root/$site/
   echo
 }
 
@@ -91,7 +91,7 @@ echo -e "${nc}"
 
 update
 compile
-clean
+#clean
 deploy
 
 echo -e "${green}"
