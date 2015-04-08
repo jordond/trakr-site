@@ -6,13 +6,15 @@
     text-align: center;
   }
   .navbar-nav {
-    display: inline-block;
     float: none;
     vertical-align: top;
   }
   .navbar-header {
+    margin-left: 35%;
     .navbar-brand {
-      padding-top: 8px;
+      img {
+        height: 30px;
+      }
       overflow: hidden;
     }
   }
@@ -135,7 +137,12 @@ body.aside-open {
     float: left;
     margin-left: 15px;
   }
-  
+
+  .navbar {
+    .navbar-header {
+      margin-left: 0;
+    }
+  }
   .fixed { top: 0px; }
 }
 
