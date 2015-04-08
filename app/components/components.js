@@ -20,12 +20,4 @@
 
   function config() {
   }
-
-  angular
-    .module('components')
-    .run(run);
-
-  function run(JsonService) {
-    JsonService.get();
-  }
 }());

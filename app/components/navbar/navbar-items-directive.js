@@ -30,11 +30,14 @@
       controllerAs: 'navbarItems',
       controller: function () {
         var vm = this;
-        vm.sections = JsonService.find('sections');
-      },
-      link: function (scope, element, attrs) {
-        /*jshint unused:false */
-        /*eslint "no-unused-vars": [2, {"args": "none"}]*/
+        if (angular.equals({}, JsonService.resume)) {
+          JsonService.get()
+            .then(function () {
+              vm.sections = JsonService.find('sections');
+            });
+        } else {
+          vm.sections = JsonService.find('sections');
+        }
       }
     };
   }
