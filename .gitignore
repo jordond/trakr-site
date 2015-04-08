@@ -36,3 +36,5 @@ e2e/
 
 rdeploy.sh
 rdeploy-build.sh
+
+*.mp4

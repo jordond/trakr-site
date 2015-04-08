@@ -1,7 +1,25 @@
 @import (reference) "../app.less";
 
-.wrapper {
+.bg {
+  padding-top: 60px;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  background: url(../../../images/desk.jpg) no-repeat center 0;
+  background-size: cover;
+  z-index: -1;
+
+}
+
+.container {
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 30px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   > .phone-holder {
+    margin-right: 30px;
     .phone {
       position: relative;
       max-width: 263px;
