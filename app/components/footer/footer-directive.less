@@ -2,7 +2,27 @@
 
 .footer {
   width: 100%;
+  min-height: 150px;
   background-color: @baseDark;
   bottom: 0;
-  position: fixed;
+  color: @bgWhite;
+  .lead {
+    font-size: 9px;
+  }
+  h4, h5 {
+    margin: 0;
+    padding: 5px;
+  }
+  .img-responsive {
+    width: 82px;
+    margin: 50px;
+    margin-left: 100px;
+  }
 }
+
+// @media (max-width: 767px) {
+//   .footer {
+//     position: relative;
+//     height: 100%;
+//   }
+// }
