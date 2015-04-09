@@ -1,21 +1,20 @@
 @import (reference) "../app.less";
 
 .bg {
-  padding-top: 60px;
+  background: no-repeat center right url(../../../images/desk.jpg);
   height: 100%;
-  width: 100%;
-  margin: auto;
-  position: relative;
-  background: url(../../../images/desk.jpg) no-repeat center 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  z-index: -1;
+  margin-bottom: 0px;
+  padding: 0px;
 }
 
 .container {
-  overflow: hidden;
   width: 100%;
   margin-bottom: 30px;
-  padding-top: 50px;
+  padding-top: 100px;
   padding-bottom: 50px;
   > .phone-holder {
     margin-right: 30px;

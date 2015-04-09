@@ -9,6 +9,6 @@
     "e2eTestFramework": "jasmine",
     "style": "less",
     "ngRoute": false,
-    "lastUsedModule": "components"
+    "lastUsedModule": "app"
   }
 }
