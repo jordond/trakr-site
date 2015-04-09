@@ -6,6 +6,7 @@
 
 @base           : #4CAF52;
 @alt            : #17B890;
+@baseDark       : #0D5D56;
 
 @bgAlt          : #DDF8E8;
 @bgBlack        : #434242;
@@ -31,4 +32,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, strong, b {
 }
 .container {
   padding-top: 80px;
+}
+
+.btn-base-dark {
+  background-color: @baseDark;
+  color: @bgWhite;
+  &:hover {
+    background-color: darken(@baseDark, 5%)
+  }
 }

@@ -1,5 +1,5 @@
-<li ng-repeat="section in navbarItems.sections" du-scrollspy="{{ section }}">
-    <a href="#{{ section }}" du-smooth-scroll ng-click="$hide();">
+<li ui-sref-active="active" ng-repeat="section in navbarItems.sections">
+    <a ui-sref="{{ section }}" ng-click="$hide();">
       {{ section | capitalize }}
     </a>
 </li>
