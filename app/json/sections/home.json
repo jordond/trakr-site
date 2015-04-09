@@ -1,0 +1,19 @@
+{
+  "home": {
+    "title": "trakR",
+    "subtitle": "The Financial Tracker",
+    "description": "Keep track of your purchases and the location where you made them.",
+    "github": {
+      "url": "https://github.com/jordond/trakr",
+      "text": "Get it on GitHub"
+    },
+    "phone": {
+      "image": "http://placehold.it/263x480",
+      "video": "images/videos/empty-show.mp4"
+    },
+    "content": {
+      "title": "TD Coding Challenge",
+      "blurb": "trakR was build for the Fanshawe Winter 2014 TD Coding Challenge, in which it placed second place.  It was inspired and designed around Google's new Material Design concept.  It is a proof of concept app for the tracking and visualization of your purchasing and spending habits."
+    }
+  }
+}

@@ -12,8 +12,8 @@
     .module('home')
     .controller('HomeCtrl', HomeCtrl);
 
-  function HomeCtrl() {
+  function HomeCtrl(JsonService) {
     var vm = this;
-    vm.ctrlName = 'HomeCtrl';
+    vm.json = JsonService.find('home');
   }
 }());

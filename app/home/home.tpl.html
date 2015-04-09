@@ -3,17 +3,30 @@
     <div class="col-lg-3 col-md-4 phone-holder">
       <div class="phone">
         <div class="phone-video">
-          <video class="img-responsive img-rounded" src="images/videos/empty-show.mp4" autoplay loop muted></video>
+          <video class="img-responsive img-rounded"
+            src="{{ home.json.phone.video }}" autoplay loop muted></video>
         </div>
         <div class="phone-image">
-          <img src="http://placehold.it/263x480" class="img-responsive img-rounded">
+          <img src="{{ home.json.phone.image }}" class="img-responsive img-rounded">
         </div>
       </div>
     </div>
     <div class="col-lg-4 col-md-4 content">
-      <h1>trakR</h1>
-      <h2>The Financial Tracker</h2>
-      <p class="lead">Keep track of your purchases and the location where you made them.</p>
+      <h1>{{ home.json.title }}</h1>
+        <h2>{{ home.json.subtitle }}</h2>
+        <p class="lead">{{ home.json.description }}</p>
+        <a href="{{ home.json.github.url }}" class="btn btn-primary">
+          {{ home.json.github.text }}
+        </a>
     </div>
+  </div>
+</div>
+<div class="container">
+  <div class="col-md-8">
+    <h3>{{ home.json.content.title }}</h3>
+    <p>{{ home.json.content.blurb }}</p>
+  </div>
+  <div class="col-md-4">
+    
   </div>
 </div>
