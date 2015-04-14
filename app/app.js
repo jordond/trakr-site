@@ -13,8 +13,9 @@
       'ui.router',
       'mgcrea.ngStrap',
       'angularMoment',
+      'components',
       'home',
-      'components'
+      'features'
     ]);
 
   angular
@@ -23,5 +24,13 @@
 
   function config($urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
+  }
+
+  angular
+    .module('trakr')
+    .run(runnable);
+
+  function runnable(JsonService) {
+    return JsonService.get();
   }
 }());

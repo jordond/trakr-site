@@ -1,0 +1,50 @@
+{
+  "features": {
+    "title": "Main trakR Features",
+    "items": [
+      {
+        "title": "User Accounts",
+        "subtitle": "Secure your information with a user account.",
+        "icon": "fa-user",
+        "image": "images/screens/login.png",
+        "video": "images/videos/create-user-account.mp4"
+      },
+      {
+        "title": "Account Management",
+        "subtitle": "Add, delete, and edit your connected accounts.  Including NFC card reading for ease of use.",
+        "icon": "fa-credit-card",
+        "image": "",
+        "video": "images/videos/account-management.mp4"
+      },
+      {
+        "title": "Check-In's",
+        "subtitle": "Search by current location, by a text search, or by long pressing a new location.",
+        "icon": "fa-street-view",
+        "image": "images/screens/checkins-overview.png",
+        "video": "images/videos/check-ins.mp4"
+      },
+      {
+        "title": "Synchronize Accounts",
+        "subtitle": "Connect your online banking accounts to trakR (Simulated)",
+        "icon": "fa-server",
+        "image": "images/screens/sync.png",
+        "video": "images/videos/synchronize-accounts.mp4"
+      },
+      {
+        "title": "Spending Analysis",
+        "subtitle": "Summary of purchases by account and by category, visualize your spending.",
+        "icon": "fa-pie-chart",
+        "image": "images/screens/spending-overview.png",
+        "video": "image/videos/spending-tab.mp4"
+      },
+      {
+        "title": "Merchant Information",
+        "subtitle": "View detailed information about where you spent your money.",
+        "icon": "fa-map-marker",
+        "image": "image/screens/checkin-2.png",
+        "video": "image/video/check-in-intents.mp4"
+      }
+    ]
+  }
+}
+

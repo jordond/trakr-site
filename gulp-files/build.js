@@ -27,7 +27,7 @@ var _ = require('underscore.string')
   , appMarkupFiles = path.join(appBase, '**/*.{haml,html,jade}')
   , appScriptFiles = path.join(appBase, '**/*.{coffee,es6,js,ts}')
   , appStyleFiles = path.join(appBase, '**/*.{css,less,scss,styl}')
-  , appJsonFiles = path.join(appBase, 'json/**/*.json')
+  , appJsonFiles = path.join(appBase, '**/**/*.json')
   , bowerDir = JSON.parse(fs.readFileSync('.bowerrc')).directory + path.sep
 
   , isProd = $.yargs.argv.env === 'prod'
