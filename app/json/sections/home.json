@@ -5,7 +5,9 @@
     "description": "Keep track of your purchases and the location where you made them.",
     "github": {
       "url": "https://github.com/jordond/trakr",
-      "text": "Check it out on GitHub"
+      "apk": "https://github.com/jordond/trakr/raw/master/app/build/outputs/apk/app-release-unaligned.apk",
+      "text": "Check it out on GitHub",
+      "text_apk": "Download APK"
     },
     "phone": {
       "image": "http://placehold.it/263x480",
