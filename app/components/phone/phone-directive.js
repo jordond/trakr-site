@@ -14,12 +14,13 @@
     .module('components')
     .directive('phone', phone);
 
-  function phone() {
+  function phone(_) {
     return {
       restrict: 'EA',
       scope: {
         video: '@',
-        image: '@'
+        image: '@',
+        args: '@'
       },
       templateUrl: 'components/phone/phone-directive.tpl.html',
       replace: true,
@@ -28,9 +29,18 @@
         var vm = this;
         vm.name = 'phone';
       },
-      link: function (scope, element, attrs) {
-        /*jshint unused:false */
-        /*eslint "no-unused-vars": [2, {"args": "none"}]*/
+      link: function (scope, element) {
+        var videoElement
+        , videoAttributes
+        , i;
+
+        if (scope.video) {
+          videoElement = angular.element(element[0].querySelector('.video'));
+          videoAttributes = _.words(scope.args);
+          for (i = 0; i < videoAttributes.length; i++) {
+            videoElement.attr(videoAttributes[i], true);
+          }
+        }
       }
     };
   }
