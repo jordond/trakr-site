@@ -1,0 +1,35 @@
+@import (reference) "../app.less";
+
+.features {
+  margin-left: 50px;
+  margin-right: 50px;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .feature {
+    color: @bgBlack;
+    text-decoration: none;
+    padding: 20px 10px 20px 10px;
+    overflow: hidden;
+    .feature-icon {
+    }
+    .feature-content {
+      max-width: 250px;
+      .feature-title {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .features {
+    margin-left: 5px;
+    margin-right: 10px;
+    li {
+    }
+    .phone {
+    }
+  }
+}

@@ -21,16 +21,29 @@
     .module('features')
     .directive('features', features);
 
-  function features() {
+  function features(_) {
     return {
       restrict: 'EA',
-      scope: {},
+      scope: {
+        content: '='
+      },
       templateUrl: 'features/features-directive.tpl.html',
       replace: true,
       controllerAs: 'features',
-      controller: function () {
-        var vm = this;
-        vm.name = 'features';
+      controller: function ($scope) {
+        var vm = this
+        , content = $scope.content
+        , chunkLength
+        , chunked;
+
+        if (content) {
+          chunkLength = Math.ceil(content.length / 2);
+          chunked = _.chunk(content, chunkLength);
+
+          vm.leftChunk = chunked[0];
+          vm.rightChunk = chunked[1];
+          vm.chunked = chunked;
+        }
       },
       link: function (scope, element, attrs) {
         /*jshint unused:false */
