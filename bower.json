@@ -11,7 +11,7 @@
     "angular-ui-router": "~0.2.10",
     "bootswatch-dist": "flatly",
     "font-awesome": "~4.2.0",
-    "lodash": "~2.4.1",
+    "lodash": "~3.6.0",
     "angular-scroll": "~0.6.5",
     "angular-motion": "~0.3.4",
     "bootstrap-additions": "~0.2.3",
