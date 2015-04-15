@@ -1,28 +1,17 @@
 <div class="features">
-  <div class="col-md-4 col-sm-6 col-xs-7 features-left">
-    <ul>
-      <li ng-repeat="feature in features.leftChunk">
-        <div class="feature">
-          <div class="feature-icon col-md-2 col-sm-2 col-xs-2"><i class="fa {{ feature.icon }}"></i></div>
-          <div class="feature-content col-md-9 col-sm-9 col-xs-9">
-            <h4 class="feature-title">{{ feature.title }}</h4>
-            <p class="feature-description">{{ feature.description }}</p>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="col-md-4 col-sm-6 col-xs-12">
+  <div class="col-md-4 col-sm-12 col-xs-12">
     <div phone
          image="images/screens/checkins-overview.png">
     </div>
   </div>
-  <div class="col-md-4 col-sm-6 col-xs-7 features-right">
+  <div class="col-md-4 col-sm-6 col-xs-12 chunk" ng-repeat="chunk in features.chunks">
     <ul>
-      <li ng-repeat="feature in features.rightChunk">
+      <li ng-repeat="feature in chunk"
+          ng-class="{ 'active': features.clicked == feature.title }"
+          ng-click="features.clicked = feature.title">
         <div class="feature">
-          <div class="feature-icon col-md-2 col-sm-2 col-xs-2"><i class="fa {{ feature.icon }}"></i></div>
-          <div class="feature-content col-md-9 col-sm-9 col-xs-9">
+          <div class="feature-icon col-md-2 col-sm-2 col-xs-1"><i class="fa {{ feature.icon }} fa-lg"></i></div>
+          <div class="feature-content col-md-9 col-sm-9 col-xs-10">
             <h4 class="feature-title">{{ feature.title }}</h4>
             <p class="feature-description">{{ feature.description }}</p>
           </div>

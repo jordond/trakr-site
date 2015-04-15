@@ -33,16 +33,12 @@
       controller: function ($scope) {
         var vm = this
         , content = $scope.content
-        , chunkLength
-        , chunked;
+        , chunkLength;
 
         if (content) {
           chunkLength = Math.ceil(content.length / 2);
-          chunked = _.chunk(content, chunkLength);
-
-          vm.leftChunk = chunked[0];
-          vm.rightChunk = chunked[1];
-          vm.chunked = chunked;
+          vm.chunks = _.chunk(content, chunkLength);
+          vm.clicked = '';
         }
       },
       link: function (scope, element, attrs) {
