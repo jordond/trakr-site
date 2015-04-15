@@ -14,7 +14,7 @@
     .module('components')
     .directive('multiVideoPhone', multiVideoPhone);
 
-  function multiVideoPhone($sce, _) {
+  function multiVideoPhone($sce, $timeout, _) {
     return {
       restrict: 'EA',
       scope: {
@@ -28,7 +28,6 @@
         var vm = this
         , list = $scope.videoList
         , active = $scope.active
-        , url
         , i;
 
         vm.state = null;
@@ -37,11 +36,39 @@
         vm.videoIndex = _.indexOf(list, active);
 
         for (i = 0; i < list.length; i++) {
-          url = $sce.trustAsResourceUrl(list[i]);
           vm.videos.push({
-            sources: [{src: url, type: {'': 'video/mp4'}}]
+            sources: [{src: $sce.trustAsResourceUrl(list[i]), type: 'video/mp4'}]
           });
         }
+
+        $scope.$watch('active', function (newValue, oldValue) {
+          if (newValue !== oldValue) {
+            vm.changeVideo(newValue);
+          }
+        });
+
+        vm.onReady = function (api) {
+          vm.api = api;
+        };
+
+        vm.changeVideo = function (videoUrl) {
+          vm.api.stop();
+          vm.videoIndex = _.indexOf(list, videoUrl);
+          vm.config.sources = vm.videos[vm.videoIndex].sources;
+          $timeout(vm.api.play.bind(vm.api), 100);
+        };
+
+        vm.onVideoComplete = function () {
+          console.log('done video');
+        };
+
+        vm.config = {
+          preload: 'none',
+          autoHide: false,
+          autoHideTime: 3000,
+          autoPlay: true,
+          sources: vm.videos[vm.videoIndex].sources
+        };
       }
     };
   }

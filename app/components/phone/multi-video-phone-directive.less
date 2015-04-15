@@ -1,0 +1,18 @@
+@import (reference) "../../app.less";
+@radius: 5px;
+.rounded {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.phone {
+  >.phone-multi-video {
+    .video {
+      .rounded();
+    }
+    video {
+      .rounded();
+    }
+  }
+}
