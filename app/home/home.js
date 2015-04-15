@@ -23,7 +23,12 @@
         url: '/',
         templateUrl: 'home/home.tpl.html',
         controller: 'HomeCtrl',
-        controllerAs: 'home'
+        controllerAs: 'home',
+        resolve: {
+          jsonService: function (JsonService) {
+            return JsonService.get();
+          }
+        }
       });
   }
 }());

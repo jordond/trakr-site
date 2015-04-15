@@ -23,7 +23,12 @@
         url: '/features',
         templateUrl: 'features/features.tpl.html',
         controller: 'FeaturesCtrl',
-        controllerAs: 'features'
+        controllerAs: 'features',
+        resolve: {
+          jsonService: function (JsonService) {
+            return JsonService.get();
+          }
+        }
       });
   }
 }());

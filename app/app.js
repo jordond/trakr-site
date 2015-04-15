@@ -25,12 +25,4 @@
   function config($urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
   }
-
-  angular
-    .module('trakr')
-    .run(runnable);
-
-  function runnable(JsonService) {
-    return JsonService.get();
-  }
 }());

@@ -30,7 +30,7 @@
       controllerAs: 'navbarItems',
       controller: function () {
         var vm = this;
-        if (angular.equals({}, JsonService.resume)) {
+        if (angular.equals({}, JsonService.json)) {
           JsonService.get()
             .then(function () {
               vm.sections = JsonService.find('sections');
