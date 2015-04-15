@@ -38,7 +38,8 @@
         if (content) {
           chunkLength = Math.ceil(content.length / 2);
           vm.chunks = _.chunk(content, chunkLength);
-          vm.clicked = '';
+          vm.videoList = _.pluck(content, 'video');
+          vm.clicked = content[0].video;
         }
       },
       link: function (scope, element, attrs) {
