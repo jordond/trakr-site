@@ -27,13 +27,12 @@
       controller: function ($scope) {
         var vm = this
         , list = $scope.videoList
-        , active = $scope.active
         , i;
 
         vm.state = null;
         vm.api = null;
         vm.videos = [];
-        vm.videoIndex = _.indexOf(list, active);
+        vm.videoIndex = _.indexOf(list, $scope.active);
 
         for (i = 0; i < list.length; i++) {
           vm.videos.push({
@@ -43,7 +42,11 @@
 
         $scope.$watch('active', function (newValue, oldValue) {
           if (newValue !== oldValue) {
-            vm.changeVideo(newValue);
+            vm.videoIndex++;
+            if (vm.videoIndex > list.length) {
+              vm.videoIndex = 0;
+            }
+            vm.changeVideo();
           }
         });
 
@@ -51,15 +54,14 @@
           vm.api = api;
         };
 
-        vm.changeVideo = function (videoUrl) {
+        vm.changeVideo = function () {
           vm.api.stop();
-          vm.videoIndex = _.indexOf(list, videoUrl);
           vm.config.sources = vm.videos[vm.videoIndex].sources;
           $timeout(vm.api.play.bind(vm.api), 100);
         };
 
         vm.onVideoComplete = function () {
-          console.log('done video');
+          $scope.active = list[vm.videoIndex + 1];
         };
 
         vm.config = {
