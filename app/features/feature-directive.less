@@ -1,11 +1,11 @@
 @import (reference) "../app.less";
 
-.mixy {
-  -webkit-transition: all 0.5s ease-in-out; 
-  -moz-transition: all 0.5s ease-in-out; 
-  -o-transition: all 0.5s ease-in-out; 
-  -ms-transition: all 0.5s ease-in-out; 
-  transition: all 0.5s ease-in-out;
+.change-animation (@duration) {
+  -webkit-transition: all @duration ease-in-out; 
+  -moz-transition: all @duration ease-in-out; 
+  -o-transition: all @duration ease-in-out; 
+  -ms-transition: all @duration ease-in-out; 
+  transition: all @duration ease-in-out;
 }
 
 .features {
@@ -14,6 +14,9 @@
   ul {
     list-style-type: none;
     padding-left: 0;
+  }
+  .fa {
+    margin-left: -3px;
   }
   .chunk {
     padding-top: 15px;
@@ -30,8 +33,10 @@
       }
       &.active {
         color: @bgBlack;
+        cursor: default;
         .feature {
           .feature-icon {
+            .change-animation(1.5s);
             border: 3px solid @base;
             color: @base;
             border-top-left-radius: 50%;
@@ -45,7 +50,7 @@
     text-decoration: none;
     padding: 5px 0 20px 0;
     overflow: hidden;
-    .mixy();
+    .change-animation(0.5s);
     .feature-icon {
       width: 60px;
       height: 60px;
@@ -60,7 +65,7 @@
       border-top-right-radius: 50%;
       border-bottom-right-radius: 50%;
       border-bottom-left-radius: 50%;
-      .mixy();
+      .change-animation(0.5s);
     }
     .feature-content {
       max-width: 250px;

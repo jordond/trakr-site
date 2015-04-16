@@ -12,7 +12,7 @@
       {
         "title": "Account Management",
         "description": "Add, delete, and edit your connected accounts.  Including NFC card reading for ease of use.",
-        "icon": "fa-credit-card",
+        "icon": "fa-money",
         "image": "",
         "video": "images/videos/account management.mp4"
       },
@@ -26,7 +26,7 @@
       {
         "title": "Synchronize Accounts",
         "description": "Connect your online banking accounts to trakR (Simulated)",
-        "icon": "fa-server",
+        "icon": "fa-cloud",
         "image": "images/screens/sync.png",
         "video": "images/videos/synchronize-accounts.mp4"
       },

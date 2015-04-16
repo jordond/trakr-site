@@ -8,10 +8,21 @@
 
 .phone {
   >.phone-multi-video {
+    z-index: 2;
+    min-height: 413px;
+    .change-animation(1.0s);
     .video {
       .rounded();
+      background-color: #222;
+      .overlayPlayContainer {
+        .play {
+          color: @baseDark;
+        }
+      }
     }
     video {
+      .change-animation(1.0s);
+      min-height: 413px;
       .rounded();
     }
   }

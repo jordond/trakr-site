@@ -19,7 +19,8 @@
       restrict: 'EA',
       scope: {
         videoList: '=',
-        active: '='
+        active: '=',
+        defaultImage: '@'
       },
       templateUrl: 'components/phone/multi-video-phone-directive.tpl.html',
       replace: false,
@@ -27,12 +28,11 @@
       controller: function ($scope) {
         var vm = this
         , list = $scope.videoList
+        , videoIndex = _.indexOf(list, $scope.active)
         , i;
 
-        vm.state = null;
         vm.api = null;
         vm.videos = [];
-        vm.videoIndex = _.indexOf(list, $scope.active);
 
         for (i = 0; i < list.length; i++) {
           vm.videos.push({
@@ -42,11 +42,7 @@
 
         $scope.$watch('active', function (newValue, oldValue) {
           if (newValue !== oldValue) {
-            vm.videoIndex++;
-            if (vm.videoIndex > list.length) {
-              vm.videoIndex = 0;
-            }
-            vm.changeVideo();
+            vm.changeVideo(newValue);
           }
         });
 
@@ -54,22 +50,28 @@
           vm.api = api;
         };
 
-        vm.changeVideo = function () {
-          vm.api.stop();
-          vm.config.sources = vm.videos[vm.videoIndex].sources;
-          $timeout(vm.api.play.bind(vm.api), 100);
+        vm.changeVideo = function (newVideo) {
+          videoIndex = _.indexOf(list, newVideo);
+          vm.config.sources = vm.videos[videoIndex].sources;
+          if (vm.api.currentState === 'play') {
+            $timeout(vm.api.play.bind(vm.api), 100);
+          }
         };
 
         vm.onVideoComplete = function () {
-          $scope.active = list[vm.videoIndex + 1];
+          videoIndex++;
+          if (videoIndex >= list.length) {
+            vm.videoIndex = 0;
+          }
+          $scope.active = list[videoIndex];
         };
 
         vm.config = {
           preload: 'none',
           autoHide: false,
           autoHideTime: 3000,
-          autoPlay: true,
-          sources: vm.videos[vm.videoIndex].sources
+          autoPlay: false,
+          sources: vm.videos[videoIndex].sources
         };
       }
     };

@@ -11,6 +11,7 @@
   angular
     .module('trakr', [
       'ui.router',
+      'ngAnimate',
       'mgcrea.ngStrap',
       'angularMoment',
       'components',

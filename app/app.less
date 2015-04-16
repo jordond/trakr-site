@@ -31,3 +31,11 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, strong, b {
 .container {
   padding-top: 80px;
 }
+
+.change-animation (@duration) {
+  -webkit-transition: all @duration ease-in-out; 
+  -moz-transition: all @duration ease-in-out; 
+  -o-transition: all @duration ease-in-out; 
+  -ms-transition: all @duration ease-in-out; 
+  transition: all @duration ease-in-out;
+}

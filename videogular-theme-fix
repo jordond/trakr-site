@@ -1,0 +1,7 @@
+"main": [
+  "./videogular.css",
+  "fonts/videogular.eot",
+  "fonts/videogular.svg",
+  "fonts/videogular.ttf",
+  "fonts/videogular.woff"
+],
