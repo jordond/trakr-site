@@ -1,7 +1,6 @@
-"main": [
-  "./videogular.css",
-  "fonts/videogular.eot",
-  "fonts/videogular.svg",
-  "fonts/videogular.ttf",
-  "fonts/videogular.woff"
-],
+#!/bin/bash
+echo "Apply fix for videogular-theme..."
+cp -v ./bower.json.videogular ./bower_components/videogular-themes-default/.bower.json
+
+echo
+echo "Done"
