@@ -29,16 +29,14 @@
         var vm = this
         , list = $scope.videoList
         , videoIndex = _.indexOf(list, $scope.active)
-        , i;
+        , api = null
+        , videos = [];
 
-        vm.api = null;
-        vm.videos = [];
-
-        for (i = 0; i < list.length; i++) {
-          vm.videos.push({
-            sources: [{src: $sce.trustAsResourceUrl(list[i]), type: 'video/mp4'}]
+        _.forEach(list, function (n) {
+          videos.push({
+            sources: [{src: $sce.trustAsResourceUrl(n), type: 'video/mp4'}]
           });
-        }
+        });
 
         $scope.$watch('active', function (newValue, oldValue) {
           if (newValue !== oldValue) {
@@ -46,15 +44,15 @@
           }
         });
 
-        vm.onReady = function (api) {
-          vm.api = api;
+        vm.onReady = function (API) {
+          api = API;
         };
 
-        vm.changeVideo = function (newVideo) {
-          videoIndex = _.indexOf(list, newVideo);
-          vm.config.sources = vm.videos[videoIndex].sources;
-          if (vm.api.currentState === 'play') {
-            $timeout(vm.api.play.bind(vm.api), 100);
+        vm.changeVideo = function (newVideoUrl) {
+          videoIndex = _.indexOf(list, newVideoUrl);
+          vm.config.sources = videos[videoIndex].sources;
+          if (api.currentState === 'play') {
+            $timeout(api.play.bind(api), 100);
           }
         };
 
@@ -69,11 +67,8 @@
         };
 
         vm.config = {
-          preload: 'none',
-          autoHide: false,
-          autoHideTime: 3000,
           autoPlay: false,
-          sources: vm.videos[videoIndex].sources
+          sources: videos[videoIndex].sources
         };
       }
     };
