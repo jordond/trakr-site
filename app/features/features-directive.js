@@ -21,7 +21,7 @@
     .module('features')
     .directive('features', features);
 
-  function features(_) {
+  function features($window, _) {
     return {
       restrict: 'EA',
       scope: {
@@ -35,6 +35,12 @@
         , content = $scope.content
         , chunkLength
         , list = [];
+
+        /*jshint undef:false */
+        /*eslint-disable*/
+        vm.isLargeScreen = $(window).width() > 768;
+        /*jshint undef:true */
+        /*eslint-enable*/
 
         if (content) {
           chunkLength = Math.ceil(content.length / 2);
