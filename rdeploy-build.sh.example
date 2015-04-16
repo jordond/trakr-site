@@ -45,16 +45,10 @@ function compile {
   echo
 }
 
-function clean {
-  echo -e "${orange}Cleaning up before deploy...${red}"
-  $ssh "$cmd rm -rvf $serve_dir" 2>&1 >>$fileName.log | tee --append $fileName.log &
-  spinner $!
-  echo
-}
-
 function deploy {
   echo -e "${orange}Deploying website files to ${green}$server@$web_root/$site/$serve_dir${orange}...${blue}"
-  rsync -ahzP --delete $build_dir/* $user@$server:$web_root/$site/
+  rsync -ahzP --delete $build_dir/* $user@$server:$web_root/$site/ >>$fileName.log | tee --append $fileName.log
+  spinner $!
   echo
 }
 
@@ -91,7 +85,6 @@ echo -e "${nc}"
 
 update
 compile
-#clean
 deploy
 
 echo -e "${green}"

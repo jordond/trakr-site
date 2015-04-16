@@ -17,12 +17,12 @@
     , jsonDir = 'json/'
     , jsonFile = 'app.json';
 
-    self.resume = {};
+    self.json = {};
 
     self.get = function () {
       return $http.get(jsonDir + jsonFile)
         .success(function (data) {
-          self.resume = data;
+          self.json = data;
         })
         .error(function (data, status) {
           $log.error(status + ' ' + data);
@@ -30,7 +30,7 @@
     };
 
     self.find = function (key) {
-      return _.chain(self.resume)
+      return _.chain(self.json)
         .pluck(key)
         .reject(_.isUndefined)
         .first()

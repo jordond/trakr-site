@@ -11,7 +11,12 @@
   angular
     .module('components', [
       'underscore',
-      'duScroll'
+      'duScroll',
+      'ngSanitize',
+      'com.2fdevs.videogular',
+      'com.2fdevs.videogular.plugins.buffering',
+      'com.2fdevs.videogular.plugins.poster',
+      'com.2fdevs.videogular.plugins.overlayplay'
     ]);
 
   angular

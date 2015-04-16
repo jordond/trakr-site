@@ -1,0 +1,126 @@
+@import (reference) "../app.less";
+
+.change-animation (@duration) {
+  -webkit-transition: all @duration ease-in-out; 
+  -moz-transition: all @duration ease-in-out; 
+  -o-transition: all @duration ease-in-out; 
+  -ms-transition: all @duration ease-in-out; 
+  transition: all @duration ease-in-out;
+}
+
+.features {
+  margin-left: 25px;
+  margin-right: 25px;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .fa {
+    margin-left: -3px;
+  }
+  .chunk {
+    padding-top: 15px;
+    li {
+      color: @bgGrey;
+      &:hover {
+        cursor: pointer;
+        color: @bgBlack;
+        .feature {
+          .feature-icon {
+            border: 3px solid @bgBlack;
+          }
+        }
+      }
+      &.active {
+        color: @bgBlack;
+        cursor: default;
+        .feature {
+          .feature-icon {
+            .change-animation(1.5s);
+            border: 3px solid @base;
+            color: @base;
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 0%;
+          }
+        }
+      }
+    }
+  }
+  .feature {
+    text-decoration: none;
+    padding: 5px 0 20px 0;
+    overflow: hidden;
+    .change-animation(0.5s);
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      line-height: 50px;
+      font-size: 1.4em;
+      text-align: center;
+      top: 16px;
+      left: 0px;
+      border: 3px solid @bgGrey;
+      background-color: @bgWhite;
+      z-index: 100;
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
+      border-bottom-left-radius: 50%;
+      .change-animation(0.5s);
+    }
+    .feature-content {
+      max-width: 250px;
+      height: 130px;
+      .feature-title {
+        margin-top: 0;
+      }
+    }
+  }
+  .phone {
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 767px) {
+  .features {
+    margin-left: 5px;
+    margin-right: 10px;
+    .feature {
+      .feature-content {
+        max-width: 100%;
+      }
+    }
+    ul {
+      li {
+        display: inline;
+      }
+    }
+    .phone {
+      visibility: hidden;
+      position: absolute;
+    }
+  }
+}
+
+@media (max-width: 410px) {
+  .features {
+    .feature {
+      .feature-icon {
+        text-align: center;
+        height: 45px;
+        width: 45px;
+        .fa-lg {
+          font-size: inherit;
+          vertical-align: 25%;
+        }
+      }
+      .feature-content {
+        .feature-title {
+          font-size: 15px;
+        }
+        .feature-description {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

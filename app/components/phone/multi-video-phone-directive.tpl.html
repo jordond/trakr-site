@@ -1,0 +1,12 @@
+<div class="phone">
+  <div class="phone-multi-video videogular-container">
+    <videogular vg-player-ready="phone.onReady($API)"
+                vg-complete="phone.onVideoComplete()"
+                vg-auto-play="phone.config.autoPlay"
+                class="video">
+      <vg-media vg-src="phone.config.sources"></vg-media>
+      <vg-buffering></vg-buffering>
+      <vg-overlay-play></vg-overlay-play>
+    </videogular>
+  </div>
+</div>

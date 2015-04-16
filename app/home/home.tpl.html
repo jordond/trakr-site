@@ -10,8 +10,11 @@
       <h1>{{ home.json.title }}</h1>
         <h2>{{ home.json.subtitle }}</h2>
         <p class="lead">{{ home.json.description }}</p>
-        <a href="{{ home.json.github.url }}" class="btn btn-primary">
+        <a  target="_blank"href="{{ home.json.github.url }}" class="btn btn-primary">
           {{ home.json.github.text }}
+        </a>
+        <a target="_blank" href="{{ home.json.github.apk }}" class="btn btn-success">
+          {{ home.json.github.text_apk }}
         </a>
     </div>
   </div>

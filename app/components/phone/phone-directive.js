@@ -25,21 +25,16 @@
       templateUrl: 'components/phone/phone-directive.tpl.html',
       replace: true,
       controllerAs: 'phone',
-      controller: function () {
-        var vm = this;
-        vm.name = 'phone';
-      },
       link: function (scope, element) {
         var videoElement
-        , videoAttributes
-        , i;
+        , videoAttributes;
 
         if (scope.video) {
           videoElement = angular.element(element[0].querySelector('.video'));
           videoAttributes = _.words(scope.args);
-          for (i = 0; i < videoAttributes.length; i++) {
-            videoElement.attr(videoAttributes[i], true);
-          }
+          _.forEach(videoAttributes, function (n) {
+            videoElement.attr(n, true);
+          });
         }
       }
     };
