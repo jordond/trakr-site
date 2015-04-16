@@ -59,9 +59,11 @@
         };
 
         vm.onVideoComplete = function () {
+          vm.config.autoPlay = true;
           videoIndex++;
-          if (videoIndex >= list.length) {
-            vm.videoIndex = 0;
+          if (videoIndex === list.length) {
+            videoIndex = 0;
+            vm.config.autoPlay = false;
           }
           $scope.active = list[videoIndex];
         };
