@@ -20,6 +20,7 @@
       scope: {
         video: '@',
         image: '@',
+        poster: '@',
         args: '@'
       },
       templateUrl: 'components/phone/phone-directive.tpl.html',
