@@ -33,12 +33,16 @@
       controller: function ($scope) {
         var vm = this
         , content = $scope.content
-        , chunkLength;
+        , chunkLength
+        , list = [];
 
         if (content) {
           chunkLength = Math.ceil(content.length / 2);
           vm.chunks = _.chunk(content, chunkLength);
-          vm.videoList = _.pluck(content, 'video');
+          _.forEach(content, function (n) {
+            list.push(_.pick(n, 'image', 'video'));
+          });
+          vm.videoList = list;
           vm.clicked = content[0].video;
         }
       },

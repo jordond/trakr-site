@@ -6,42 +6,42 @@
         "title": "User Accounts",
         "description": "Secure your information with a user account.",
         "icon": "fa-user",
-        "image": "images/screens/login.png",
+        "image": "images/screens/create-user-account.png",
         "video": "images/videos/create-user-account.mp4"
       },
       {
         "title": "Account Management",
         "description": "Add, delete, and edit your connected accounts.  Including NFC card reading for ease of use.",
         "icon": "fa-money",
-        "image": "",
-        "video": "images/videos/account management.mp4"
+        "image": "images/screens/account-management.png",
+        "video": "images/videos/account-management.mp4"
       },
       {
         "title": "Check-In's",
         "description": "Search by current location, by a text search, or by long pressing a new location.",
         "icon": "fa-street-view",
-        "image": "images/screens/checkins-overview.png",
+        "image": "images/screens/check-ins.png",
         "video": "images/videos/check-ins.mp4"
       },
       {
         "title": "Synchronize Accounts",
         "description": "Connect your online banking accounts to trakR (Simulated)",
         "icon": "fa-cloud",
-        "image": "images/screens/sync.png",
+        "image": "images/screens/synchronize-accounts.png",
         "video": "images/videos/synchronize-accounts.mp4"
       },
       {
         "title": "Spending Analysis",
         "description": "Summary of purchases by account and by category, visualize your spending.",
         "icon": "fa-pie-chart",
-        "image": "images/screens/spending-overview.png",
+        "image": "images/screens/spending-tab.png",
         "video": "images/videos/spending-tab.mp4"
       },
       {
         "title": "Merchant Information",
         "description": "View detailed information about where you spent your money.",
         "icon": "fa-map-marker",
-        "image": "images/screens/checkin-2.png",
+        "image": "images/screens/check-in-intents.png",
         "video": "images/videos/check-in-intents.mp4"
       }
     ]
