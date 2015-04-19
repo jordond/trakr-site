@@ -66,7 +66,7 @@
             activeIndex = 0;
             vm.config.autoPlay = false;
           }
-          $scope.active = list[activeIndex];
+          $scope.active = list[activeIndex].video;
         };
 
         vm.updatePoster = function () {
