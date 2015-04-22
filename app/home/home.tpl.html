@@ -8,30 +8,30 @@
            poster="{{ home.json.phone.image }}"></div>
     </div>
     <div class="col-lg-4 col-md-4 content">
-      <h1>{{ home.json.title }}</h1>
-        <h2>{{ home.json.subtitle }}</h2>
+      <h1>{{ ::home.json.title }}</h1>
+        <h2>{{ ::home.json.subtitle }}</h2>
         <p class="lead">{{ home.json.description }}</p>
         <a  target="_blank"href="{{ home.json.github.url }}" class="btn btn-primary">
-          {{ home.json.github.text }}
+          {{ ::home.json.github.text }}
         </a>
         <a target="_blank" href="{{ home.json.github.apk }}" class="btn btn-success">
-          {{ home.json.github.text_apk }}
+          {{ ::home.json.github.text_apk }}
         </a>
     </div>
   </div>
 </div>
 <div class="container">
   <div class="col-lg-6 col-lg-offset-1 col-md-8 col-sm-6 content no-margin">
-    <h3>{{ home.json.content.title }}</h3>
-    <p>{{ home.json.content.description }}</p>
+    <h3>{{ ::home.json.content.title }}</h3>
+    <p>{{ ::home.json.content.description }}</p>
     <br>
     <br>
-    <h4>{{ home.json.content.extra_info }}</h4>
+    <h4>{{ ::home.json.content.extra_info }}</h4>
     <a ui-sref="features" class="btn btn-info">Click Me!</a>
   </div>
   <div class="col-lg-3 col-md-4 col-sm-6">
     <div phone
-         image="{{ home.json.content.screenshot }}"></div>
+         image="{{ ::home.json.content.screenshot }}"></div>
   </div>
 </div>
 <div class="home-footer">

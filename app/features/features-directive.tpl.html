@@ -16,11 +16,11 @@
             ng-click="features.clicked = feature.video">
           <div class="feature">
             <div class="feature-icon col-md-2 col-sm-2 col-xs-2">
-              <i class="fa {{ feature.icon }} fa-lg"></i>
+              <i class="fa {{ ::feature.icon }} fa-lg"></i>
             </div>
             <div class="feature-content col-md-9 col-sm-9 col-xs-9">
-              <h4 class="feature-title">{{ feature.title }}</h4>
-              <p class="feature-description">{{ feature.description }}</p>
+              <h4 class="feature-title">{{ ::feature.title }}</h4>
+              <p class="feature-description">{{ ::feature.description }}</p>
             </div>
           </div>
         </li>

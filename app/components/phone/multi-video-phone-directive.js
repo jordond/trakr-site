@@ -54,7 +54,7 @@
         vm.changeVideo = function (newVideoUrl) {
           activeIndex = _.findIndex(list, {video: newVideoUrl});
           vm.config.sources = videos[activeIndex].sources;
-          if (api.currentState === 'play') {
+          if (vm.config.autoPlay) {
             $timeout(api.play.bind(api), 100);
           }
         };

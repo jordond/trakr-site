@@ -1,18 +1,29 @@
-# trakr
+# trakr Website
+
+I built this website using [AngularJS](https://angular.io/) bootstrapped with [ng-poly](https://github.com/dustinspecker/generator-ng-poly).
+
+This website is meant to showcase a few of the features built into my Android trakR application, which you can check out [here](http://github.com/jordond/trakr).
+
+Feel free to use any of the code, or don't up to you.  Check out the [Yeoman](http://yeoman.io/) generator [ng-poly](https://github.com/dustinspecker/generator-ng-poly) though, they are both really convenient.
 
 ## Setup
-1. Install [Node.js](http://nodejs.org/)
- - This will also install npm.
 1. Run `npm install -g bower gulp yo generator-ng-poly`
- - This enables Bower, Gulp, and Yeoman generators to be used from command line.
-1. Run `npm install` to install this project's dependencies
-1. Run `bower install` to install client-side dependencies
-1. Use [generator-ng-poly](https://github.com/dustinspecker/generator-ng-poly) to create additional components
+1. Run `bower install && npm install` to install this project's dependencies
 
-## Gulp tasks
-- Run `gulp build` to compile assets
-- Run `gulp dev` to run the build task and setup the development environment
-- Run `gulp unitTest` to run unit tests via Karma and to create code coverage reports
-- Run `gulp webdriverUpdate` to download Selenium server standalone and Chrome driver for e2e testing
-- Run `gulp e2eTest` to run e2e tests via Protractor
- - **A localhost must be running** - `gulp dev`
+## Deploy
+1. Make sure you ran the setup ie. `bower install && npm install`
+2. Rename `rdeploy-build.sh.example` to `redeploy-build.sh`
+3. Fill in the following variables: `user`, `server`, `web_root`, `site`, and you can change the other variables like build/serve directory, log name, etc.
+4. Run `./rdeploy-build.sh <branch> <dev|prod>` or simply `./rdeploy-build.sh` which defaults to the production mode on the current branch.
+
+This will build the project, then using rsync will copy the files to the server.  Passwordless ssh is recommended, but you will also be prompted to login if necessary. If you think something went wrong, check the directory for `deploy.log` or whatever you changed the name to be.
+
+### Gulp tasks
+- Run `gulp` to compile for dev and launch server
+- Run `gulp build` to compile for dev
+- Flags `--env=prod` to compile for production
+-       `--env=prod --pretty` to compile for production without minification
+
+## Check it out
+
+This project is active and running at http://trakr.hoogit.ca, so check it out!
