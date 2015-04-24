@@ -1,6 +1,0 @@
-#!/bin/bash
-echo "Apply fix for videogular-theme..."
-cp -v ./bower.json.videogular ./bower_components/videogular-themes-default/.bower.json
-
-echo
-echo "Done"

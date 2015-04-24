@@ -269,7 +269,7 @@ gulp.task('bowerInject', ['bowerCopy'], function () {
 
 // copy Bower fonts and images into build directory
 gulp.task('bowerAssets', ['clean'], function () {
-  var assetFilter = $.filter('**/*.{eot,otf,svg,ttf,woff,gif,jpg,jpeg,png}');
+  var assetFilter = $.filter('**/*.{eot,otf,svg,ttf,woff,woff2,gif,jpg,jpeg,png}');
   return gulp.src($.mainBowerFiles(), {base: bowerDir})
     .pipe(assetFilter)
     .pipe(gulp.dest(buildConfig.extDir))
@@ -278,7 +278,7 @@ gulp.task('bowerAssets', ['clean'], function () {
 
 // copy custom fonts into build directory
 gulp.task('fonts', ['clean'], function () {
-  var fontFilter = $.filter('**/*.{eot,otf,svg,ttf,woff}');
+  var fontFilter = $.filter('**/*.{eot,otf,svg,ttf,woff,woff2}');
   return gulp.src([appFontFiles])
     .pipe(fontFilter)
     .pipe(gulp.dest(buildConfig.buildFonts))
